@@ -1,0 +1,13 @@
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+
+[*.cs]
+dotnet_style_predefined_type_for_locals_parameters_members = true
+dotnet_style_predefined_type_for_member_access = true
+csharp_style_namespace_declarations = file_scoped
+
+[*.{json,props,csproj,md}]
+indent_size = 2

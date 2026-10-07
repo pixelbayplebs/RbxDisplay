@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Version>2.0.1</Version>
+    <Authors>Stretcher</Authors>
+    <Company>Stretcher</Company>
+    <Copyright>Stretcher</Copyright>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>

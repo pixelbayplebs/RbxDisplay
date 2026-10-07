@@ -1,0 +1,109 @@
+# Build results
+bin/
+obj/
+out/
+artifacts/
+build/
+
+# Visual Studio
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Test results
+TestResults/
+*.trx
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# Debug / logs
+*.log
+*.tlog
+*.lastbuildstate
+
+# Generated files
+Generated/
+Generated Files/
+*.g.cs
+*.g.i.cs
+
+# Native / compiler artifacts
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.obj
+*.pch
+*.idb
+*.ipdb
+*.iobj
+
+# Publish output
+publish/
+PublishProfiles/
+
+# MSIX / Windows packaging
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.appxupload
+*.msixupload
+*.cer
+
+# Signing certificates / secrets
+*.pfx
+*.p12
+*.key
+*.pem
+
+# Local settings / secrets
+appsettings.Development.json
+appsettings.Local.json
+.env
+.env.*
+secrets.json
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini
+
+# OS files
+.DS_Store
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# StyleCop
+StyleCopReport.xml
