@@ -1,6 +1,9 @@
 > [!IMPORTANT]
 > RbxDisplay 2.0.1 runs on 64-bit Windows 10, version 2004 (May 2020) or newer, and on 64-bit Windows 11.
 
+> [!NOTE]
+> RbxDisplay is updated in spare time, so a fix can take a while. Report every bug or other problem in [Issues](https://github.com/pixelbayplebs/Stretcher/issues).
+
 <p align="center">
     <img src="src/RbxDisplay.App/Assets/RbxDisplayFull.png" width="640" alt="RbxDisplay">
 </p>
@@ -11,7 +14,7 @@ RbxDisplay remembers a display setup for each Roblox game. While that game is th
 
 It sees which game you joined by reading Roblox's own log. **Play** opens the game link saved for that setup.
 
-How to use the window, the game list, and recovery is in [USAGE.md](USAGE.md). Building the app yourself is optional and is described in [BUILD.md](BUILD.md).
+How to use the window, the game list, and recovery is in [USAGE.md](USAGE.md). Building the app yourself is optional and is described in [BUILD.md](BUILD.md). For a bug or any other problem, open an [issue](https://github.com/pixelbayplebs/Stretcher/issues).
 
 RbxDisplay runs on Windows only.
 
@@ -37,14 +40,16 @@ RbxDisplay runs on Windows only.
 
 ## Installing
 
-1. Download the [latest release](https://github.com/pixelbayplebs/Stretcher/releases/latest).
-2. If the download is a zip file, right-click it and choose **Extract All**. Use the folder that Windows creates. A good place is Downloads or the Desktop. Leave the files together: `RbxDisplay.exe`, `RbxDisplay.Watchdog.exe`, the DLL files, and the `Assets` folder. Open `RbxDisplay.exe` from that folder. Opening it from inside the zip window leaves those files behind, and the app cannot run that way.
-3. The PC needs the 64-bit .NET Desktop Runtime 10. If a window says the app cannot start and asks for .NET, open the [.NET 10 download page](https://dotnet.microsoft.com/download/dotnet/10.0), download **Desktop Runtime** for **x64**, install it, and start `RbxDisplay.exe` again.
-4. The first time you open `RbxDisplay.exe`, Windows can show a blue window titled **Windows protected your PC**. The text says Microsoft Defender SmartScreen prevented an unrecognized app from starting. Publisher is listed as unknown. The button on the window is **Don't run**.
+1. Open the [latest release](https://github.com/pixelbayplebs/Stretcher/releases/latest).
+2. Under **Assets**, download **`RbxDisplay-2.0.1-win-x64.zip`**. That zip is the program. The links named **Source code** are the project files, not the app. Leave those alone.
+3. Right-click the zip and choose **Extract All**. A good place is Downloads or the Desktop. Windows makes a folder from the zip. Open that folder.
+4. Leave every file in the folder together: `RbxDisplay.exe`, `RbxDisplay.Watchdog.exe`, the DLL files, and the `Assets` folder. Start `RbxDisplay.exe` from this folder. Opening it from inside the zip window leaves the other files behind, and the app cannot run that way.
+5. The PC needs the 64-bit .NET Desktop Runtime 10. If a window says the app cannot start and asks for .NET, open the [.NET 10 download page](https://dotnet.microsoft.com/download/dotnet/10.0), download **Desktop Runtime** for **x64**, install it, and start `RbxDisplay.exe` again.
+6. The first time you open `RbxDisplay.exe`, Windows can show a blue window titled **Windows protected your PC**. The text says Microsoft Defender SmartScreen prevented an unrecognized app from starting. Publisher is **Unknown publisher**. The button on the window is **Don't run**.
 
-   That window is the unknown-publisher warning. This release has no digital signature, so Windows has not seen this publisher before. A different window, one that says a virus or threat was found, is not this step. Close that window and do not continue.
+   Windows shows this because the zip was downloaded from the internet, and because this release is not signed. A download is marked as coming from the web. An unsigned program has no publisher certificate, so SmartScreen cannot name who made it and has no reputation for the file yet. It stops the program until you allow it. The heading and the line about risk are the standard text for that case. They appear for other new programs in the same situation.
 
-   On the blue unknown-app window, click the **More info** link. A **Run anyway** button appears. Click **Run anyway**. RbxDisplay opens after that.
+   Click the **More info** link. A **Run anyway** button appears. Click **Run anyway**. RbxDisplay opens, and Windows remembers that choice for this copy of the file.
 
 ## Building from source
 
@@ -64,6 +69,8 @@ dotnet --version
 
 Copy the whole `build` folder when you move that build. Keep the executables, DLLs, `Assets`, and resource files together. The first start can show the same SmartScreen window as in [Installing](#installing).
 
+To pack the same zip that is posted on Releases, run `.\Release.cmd`. It builds the app, then writes `RbxDisplay-2.0.1-win-x64.zip` next to the source. The version in that name comes from [Directory.Build.props](Directory.Build.props).
+
 If the build fails, the cases and the test-only command are in [BUILD.md](BUILD.md).
 
 ## Code
@@ -79,10 +86,11 @@ The window is native WinUI 3 in C#, built with [Windows App SDK 2.5.1](https://l
 | `src/RbxDisplay.Watchdog/` | Independent restoration process |
 | `tests/RbxDisplay.Core.Tests/` | xUnit checks for display, recovery and profiles |
 | `src/RbxDisplay.App/Assets/` | Original logos and application icon used by the build |
-| `Build.cmd`, `Build.ps1` | Test and publish the complete Windows x64 distribution |
+| `Build.cmd`, `Build.ps1` | Test and publish the complete Windows x64 distribution into `build` |
+| `Release.cmd` | Build, then zip that folder as `RbxDisplay-2.0.1-win-x64.zip` |
 
 What the 2.0.1 checks cover, and what still has to be tried on a Windows PC, is in [Verification.md](Verification.md).
 
 ## Code signing
 
-Releases are not digitally signed. This repository does not include a code-signing certificate. The first time you start `RbxDisplay.exe`, Windows can show the unknown-app SmartScreen window. Click **More info**, then **Run anyway**. The window is described step by step in [Installing](#installing). If the text says a virus or threat was found, that is a different warning. Close it and do not use **Run anyway**.
+Releases are not digitally signed. This repository does not include a code-signing certificate, so the first start of a downloaded `RbxDisplay.exe` can show SmartScreen with publisher **Unknown**. Click **More info**, then **Run anyway**. Why that window appears is described in [Installing](#installing).
