@@ -5,7 +5,7 @@
 > RbxDisplay is updated in spare time, so a fix can take a while. Report every bug or other problem in [Issues](https://github.com/pixelbayplebs/Stretcher/issues).
 
 <p align="center">
-    <img src="src/RbxDisplay.App/Assets/RbxDisplayFull.png" width="640" alt="RbxDisplay">
+    <img src="images/RbxDisplayFull.png" width="640" alt="RbxDisplay">
 </p>
 
 ----
@@ -15,6 +15,18 @@ RbxDisplay remembers a display setup for each Roblox game. While that game is th
 It sees which game you joined by reading Roblox's own log. **Play** opens the game link saved for that setup.
 
 How to use the window, the game list, and recovery is in [USAGE.md](USAGE.md). Building the app yourself is optional and is described in [BUILD.md](BUILD.md). For a bug or any other problem, open an [issue](https://github.com/pixelbayplebs/Stretcher/issues).
+
+**Live** shows whether a saved game is the window in front, and which setup is applied.
+
+<p align="center">
+    <img src="images/RbxDisplayPreview_Live.png" width="720" alt="Live page. Monitoring is on, and no Roblox game is detected.">
+</p>
+
+**Games** is the saved list. Each game keeps its own monitor, resolution, and color.
+
+<p align="center">
+    <img src="images/RbxDisplayPreview_Games.png" width="720" alt="Games page. BloxStrike has its own monitor, resolution, and saturation.">
+</p>
 
 RbxDisplay runs on Windows only.
 
@@ -85,7 +97,8 @@ The window is native WinUI 3 in C#, built with [Windows App SDK 2.5.1](https://l
 | `src/RbxDisplay.Core/` | Display modes, saturation, Roblox detection, saved profiles and recovery |
 | `src/RbxDisplay.Watchdog/` | Independent restoration process |
 | `tests/RbxDisplay.Core.Tests/` | xUnit checks for display, recovery and profiles |
-| `src/RbxDisplay.App/Assets/` | Original logos and application icon used by the build |
+| `src/RbxDisplay.App/Assets/` | Logo and icon shipped with the app |
+| `images/` | README logo and window previews, not copied into the release |
 | `Build.cmd`, `Build.ps1` | Test and publish the complete Windows x64 distribution into `build` |
 | `Release.cmd` | Build, then zip that folder as `RbxDisplay-2.0.1-win-x64.zip` |
 
