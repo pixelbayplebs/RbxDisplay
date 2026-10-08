@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>RbxDisplay.Core</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="RbxDisplay" />
+    <InternalsVisibleTo Include="RbxDisplay.Watchdog" />
+    <InternalsVisibleTo Include="RbxDisplay.Core.Tests" />
+  </ItemGroup>
+</Project>

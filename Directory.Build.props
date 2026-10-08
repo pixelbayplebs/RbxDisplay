@@ -6,9 +6,9 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Version>2.0.1</Version>
-    <Authors>Stretcher</Authors>
-    <Company>Stretcher</Company>
-    <Copyright>Stretcher</Copyright>
+    <Authors>RbxDisplay</Authors>
+    <Company>RbxDisplay</Company>
+    <Copyright>RbxDisplay</Copyright>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 </Project>

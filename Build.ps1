@@ -11,10 +11,10 @@ function Run-Dotnet([string[]]$Arguments) {
 }
 function Copy-TestClosure([string]$Checks, [string]$Build) {
     $names = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-    foreach ($name in @('Stretcher.Core.Tests.exe', 'Stretcher.Core.Tests.dll', 'Stretcher.Core.Tests.deps.json', 'Stretcher.Core.Tests.runtimeconfig.json')) {
+    foreach ($name in @('RbxDisplay.Core.Tests.exe', 'RbxDisplay.Core.Tests.dll', 'RbxDisplay.Core.Tests.deps.json', 'RbxDisplay.Core.Tests.runtimeconfig.json')) {
         [void]$names.Add($name)
     }
-    $depsPath = Join-Path $Checks 'Stretcher.Core.Tests.deps.json'
+    $depsPath = Join-Path $Checks 'RbxDisplay.Core.Tests.deps.json'
     if (Test-Path $depsPath) {
         $deps = Get-Content $depsPath -Raw | ConvertFrom-Json
         foreach ($target in $deps.targets.PSObject.Properties) {
@@ -37,24 +37,37 @@ function Copy-TestClosure([string]$Checks, [string]$Build) {
         Copy-Item $source $dest -Force
     }
 }
-if (-not $SkipTests) { Run-Dotnet -Arguments @('test', 'tests/Stretcher.Core.Tests/Stretcher.Core.Tests.csproj', '-c', 'Release') }
+if (-not $SkipTests) { Run-Dotnet -Arguments @('test', 'tests/RbxDisplay.Core.Tests/RbxDisplay.Core.Tests.csproj', '-c', 'Release') }
 $build = Join-Path $PSScriptRoot 'build'
-$stage = Join-Path ([System.IO.Path]::GetTempPath()) ('Stretcher-stage-' + [guid]::NewGuid().ToString('N'))
+$stage = Join-Path ([System.IO.Path]::GetTempPath()) ('RbxDisplay-stage-' + [guid]::NewGuid().ToString('N'))
 $guard = Join-Path $stage 'watchdog'
 $checks = Join-Path $stage 'checks'
 if (Test-Path $build) { Remove-Item $build -Recurse -Force }
 try {
-    Run-Dotnet -Arguments @('publish', 'src/Stretcher.App/Stretcher.App.csproj', '-c', 'Release', '-p:Platform=x64', '-o', $build)
-    Run-Dotnet -Arguments @('publish', 'src/Stretcher.Watchdog/Stretcher.Watchdog.csproj', '-c', 'Release', '-p:Platform=x64', '-o', $guard)
-    Run-Dotnet -Arguments @('publish', 'tests/Stretcher.Core.Tests/Stretcher.Core.Tests.csproj', '-c', 'Release', '-r', 'win-x64', '--self-contained', 'true', '-o', $checks)
+    Run-Dotnet -Arguments @('publish', 'src/RbxDisplay.App/RbxDisplay.App.csproj', '-c', 'Release', '-p:Platform=x64', '-o', $build)
+    Run-Dotnet -Arguments @('publish', 'src/RbxDisplay.Watchdog/RbxDisplay.Watchdog.csproj', '-c', 'Release', '-p:Platform=x64', '-o', $guard)
+    Run-Dotnet -Arguments @('publish', 'tests/RbxDisplay.Core.Tests/RbxDisplay.Core.Tests.csproj', '-c', 'Release', '-r', 'win-x64', '--self-contained', 'false', '-o', $checks)
     if (-not (Test-Path (Join-Path $build 'resources.pri'))) { throw 'WinUI resource indexing did not produce resources.pri. The release was not copied.' }
-    $required = @('Stretcher.exe', 'Stretcher.dll', 'Stretcher.deps.json', 'Stretcher.runtimeconfig.json', 'Stretcher.Core.dll', 'Microsoft.UI.Xaml.Controls.dll', 'Microsoft.WinUI.dll', 'Assets/Stretcher.ico', 'Assets/Stretcher.png')
+    $required = @('RbxDisplay.exe', 'RbxDisplay.dll', 'RbxDisplay.deps.json', 'RbxDisplay.runtimeconfig.json', 'RbxDisplay.Core.dll', 'Microsoft.UI.Xaml.Controls.dll', 'Microsoft.WinUI.dll', 'Assets/RbxDisplay.ico', 'Assets/RbxDisplay.png')
     foreach ($file in $required) { if (-not (Test-Path (Join-Path $build $file))) { throw "The release is missing $file" } }
-    foreach ($file in @('Stretcher.Watchdog.exe', 'Stretcher.Watchdog.dll', 'Stretcher.Watchdog.deps.json', 'Stretcher.Watchdog.runtimeconfig.json')) { Copy-Item (Join-Path $guard $file) $build -Force }
+    foreach ($file in @('RbxDisplay.Watchdog.exe', 'RbxDisplay.Watchdog.dll', 'RbxDisplay.Watchdog.deps.json', 'RbxDisplay.Watchdog.runtimeconfig.json')) { Copy-Item (Join-Path $guard $file) $build -Force }
     Copy-TestClosure $checks $build
-    $pending = Join-Path $build 'Stretcher.resources.pending'
+    foreach ($file in @('hostfxr.dll', 'hostpolicy.dll', 'coreclr.dll', 'System.Private.CoreLib.dll')) {
+        if (Test-Path (Join-Path $build $file)) { throw "The release contains the .NET runtime file $file" }
+    }
+    foreach ($file in @('RbxDisplay.runtimeconfig.json', 'RbxDisplay.Watchdog.runtimeconfig.json', 'RbxDisplay.Core.Tests.runtimeconfig.json')) {
+        $path = Join-Path $build $file
+        if (-not (Test-Path $path)) { throw "The release is missing $file" }
+        $options = (Get-Content $path -Raw | ConvertFrom-Json).runtimeOptions
+        if ($null -ne $options.PSObject.Properties['includedFrameworks']) { throw "$file describes a self-contained publish" }
+        $names = [System.Collections.Generic.List[string]]::new()
+        if ($null -ne $options.framework.name) { [void]$names.Add([string]$options.framework.name) }
+        foreach ($framework in @($options.frameworks)) { if ($null -ne $framework.name) { [void]$names.Add([string]$framework.name) } }
+        if (-not $names.Contains('Microsoft.NETCore.App')) { throw "$file does not name framework Microsoft.NETCore.App" }
+    }
+    $pending = Join-Path $build 'RbxDisplay.resources.pending'
     if (Test-Path $pending) { Remove-Item $pending -Force }
-    Write-Host 'Build complete. Start build\Stretcher.exe. The Windows resource index is finalized.'
+    Write-Host 'Build complete. Start build\RbxDisplay.exe. The Windows resource index is finalized.'
 } finally {
     if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
 }
