@@ -1,6 +1,6 @@
 # RbxDisplay 2.0.1 — usage
 
-This source archive must be built before starting the app; follow BUILD.md. The instructions below apply to the published application.
+A GitHub Release is ready to run. The instructions below apply to that published folder. To build from this source tree instead, follow BUILD.md.
 
 RbxDisplay is a native **WinUI 3** desktop application for saved Roblox game profiles. Each game has its own monitor, baseline, resolution, saturation and focus behavior. BloxStrike is included as the first preset. RbxDisplay matches the running game's Universe ID to a saved profile. Launching still uses that profile's Place ID.
 
