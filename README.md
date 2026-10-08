@@ -14,19 +14,12 @@ RbxDisplay remembers a display setup for each Roblox game. While that game is th
 
 It sees which game you joined by reading Roblox's own log. **Play** opens the game link saved for that setup.
 
+<p align="center">
+    <img src="images/RbxDisplayPreview_Live.png" width="420" alt="Live">
+    <img src="images/RbxDisplayPreview_Games.png" width="420" alt="Games">
+</p>
+
 How to use the window, the game list, and recovery is in [USAGE.md](USAGE.md). Building the app yourself is optional and is described in [BUILD.md](BUILD.md). For a bug or any other problem, open an [issue](https://github.com/pixelbayplebs/Stretcher/issues).
-
-**Live** shows whether a saved game is the window in front, and which setup is applied.
-
-<p align="center">
-    <img src="images/RbxDisplayPreview_Live.png" width="720" alt="Live page. Monitoring is on, and no Roblox game is detected.">
-</p>
-
-**Games** is the saved list. Each game keeps its own monitor, resolution, and color.
-
-<p align="center">
-    <img src="images/RbxDisplayPreview_Games.png" width="720" alt="Games page. BloxStrike has its own monitor, resolution, and saturation.">
-</p>
 
 RbxDisplay runs on Windows only.
 
