@@ -110,3 +110,6 @@ BenchmarkDotNet.Artifacts/
 
 # StyleCop
 StyleCopReport.xml
+
+# ai shit
+docs/
