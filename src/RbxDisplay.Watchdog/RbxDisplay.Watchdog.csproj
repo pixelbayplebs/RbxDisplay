@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>RbxDisplay.Watchdog</AssemblyName>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <ApplicationManifest>../RbxDisplay.App/app.manifest</ApplicationManifest>
+    <ApplicationIcon>../RbxDisplay.App/Assets/RbxDisplay.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="../RbxDisplay.Core/RbxDisplay.Core.csproj" /></ItemGroup>
+</Project>

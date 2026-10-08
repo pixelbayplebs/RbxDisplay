@@ -1,5 +1,5 @@
 {
-  "SchemaVersion": 2,
+  "SchemaVersion": 3,
   "SelectedGameId": "bloxstrike",
   "Games": [
     {
@@ -7,6 +7,11 @@
       "Name": "BloxStrike",
       "PlaceIds": "114234929420007",
       "UniverseIds": "7633926880",
+      "MonitorDevice": "",
+      "AutoBase": true,
+      "BaseWidth": 3440,
+      "BaseHeight": 1440,
+      "BaseRefresh": 0,
       "GameWidth": 1920,
       "GameHeight": 1440,
       "SaturationEnabled": true,
@@ -14,11 +19,6 @@
       "ResolutionOnFocusOnly": false
     }
   ],
-  "MonitorDevice": "",
-  "AutoBase": true,
-  "BaseWidth": 3440,
-  "BaseHeight": 1440,
-  "BaseRefresh": 0,
   "LogsFolder": "",
   "PollMilliseconds": 750
 }
